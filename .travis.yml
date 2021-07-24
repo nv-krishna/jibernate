@@ -1,0 +1,20 @@
+language: java
+jdk:
+    - oraclejdk8
+
+after_success:
+- ./gradlew test jacocoTestReport coveralls
+
+notifications:
+  email:
+    recipients:
+      - wuyichen24@gmail.com
+    on_success: never
+    on_failure: always
+
+services:
+  - mysql
+
+before_install:
+  - mysqladmin --user=root password "6ytow2-;S3lA"                #set the password for root user
+  - mysql -u root --password="6ytow2-;S3lA" < config/travis.sql
